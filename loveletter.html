@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>A Love Letter for You</title>
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#ff6b9a;
+      --muted:#9aa4b2;
+      --glass: rgba(255,255,255,0.06);
+      --radius:16px;
+      --mono: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{
+      height:100%;
+      margin:0;
+      font-family:var(--mono);
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(255,107,154,0.06), transparent),
+                  radial-gradient(900px 400px at 90% 90%, rgba(99,102,241,0.04), transparent),
+                  var(--bg);
+      color:#e6eef8
+    }
+
+    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:48px}
+
+    .card{
+      width:min(920px,96%);
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--radius);
+      box-shadow: 0 12px 40px rgba(2,6,23,0.7);
+      overflow:hidden;
+      display:grid;grid-template-columns:1fr 420px;gap:0;
+    }
+
+    @media (max-width:880px){.card{grid-template-columns:1fr} .side{display:none}}
+
+    .main{padding:48px}
+    .header{display:flex;align-items:center;gap:16px}
+    .avatar{width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,var(--accent),#6346ff);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:28px;box-shadow:0 6px 18px rgba(99,70,255,0.15)}
+    h1{margin:0;font-size:20px;letter-spacing:0.4px}
+    p.lead{margin:10px 0 22px;color:var(--muted)}
+
+    .letter{
+      background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+      border-radius:12px;padding:28px;min-height:260px;line-height:1.6;font-size:17px;color:#f1f8ff;border:1px solid rgba(255,255,255,0.03)
+    }
+
+    .controls{display:flex;gap:12px;margin-top:18px}
+    .btn{padding:10px 14px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.03);cursor:pointer}
+    .btn.accent{background:linear-gradient(90deg,var(--accent),#8a6bff);color:white;border:none;box-shadow:0 6px 18px rgba(99,70,255,0.18)}
+
+    /* side */
+    .side{background:linear-gradient(180deg, rgba(255,107,154,0.03), rgba(99,70,255,0.02));padding:34px;display:flex;flex-direction:column;gap:18px;align-items:center;justify-content:center}
+    .photo {
+      width: 100%;
+      max-width: 280px;
+      border-radius: 18px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+    .sparkles{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+    .spark{width:48px;height:48px;border-radius:10px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;font-size:20px}
+
+    /* typewriter */
+    .typed{white-space:pre-wrap;word-break:break-word;min-height:150px}
+    .cursor{display:inline-block;width:10px;background:white;margin-left:6px;animation:blink 1s steps(2,end) infinite;border-radius:2px}
+    @keyframes blink{50%{opacity:0}}
+
+    /* subtle floating hearts */
+    .floating{position:absolute;inset:0;pointer-events:none}
+    .floating i{position:absolute;width:12px;height:12px;background:var(--accent);transform:rotate(45deg);border-radius:2px;opacity:0.9;animation:float 6s linear infinite}
+    @keyframes float{0%{transform:translateY(0) rotate(45deg) scale(0.9);opacity:0}10%{opacity:1}100%{transform:translateY(-420px) rotate(45deg) scale(1.2);opacity:0}}
+
+    footer{margin-top:18px;color:var(--muted);font-size:13px}
+
+    /* print */
+    @media print{body{background:white;color:black} .card{box-shadow:none;background:white} .side{display:none}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" role="main" aria-labelledby="title">
+      <div class="main">
+        <div class="header">
+          <div class="avatar" id="avatar">💌</div>
+          <div>
+            <h1 id="title">A Letter Just For You</h1>
+            <p class="lead">Press "Reveal" to slowly unveil the message.</p>
+          </div>
+        </div>
+
+        <div class="letter" id="letter">
+          <div class="typed" id="typed"> </div><span class="cursor" id="cursor"></span>
+        </div>
+
+        <div class="controls">
+          <button class="btn" id="reveal">Reveal</button>
+        </div>
+
+        <footer>Made by Garem for you, My Pryncess</footer>
+      </div>
+
+      <!-- Side panel with her picture -->
+      <div class="side">
+        <img src="pryncess.jfif" alt="Her picture" class="photo" />
+        <div class="sparkles">
+          <div class="spark">🌙</div>
+          <div class="spark">✨</div>
+          <div class="spark">🌸</div>
+          <div class="spark">💫</div>
+        </div>
+      </div>
+
+      <div class="floating" aria-hidden="true">
+        <i style="left:12%;bottom:10%;animation-delay:0s"></i>
+        <i style="left:28%;bottom:6%;width:10px;height:10px;animation-delay:1.2s"></i>
+        <i style="left:60%;bottom:12%;animation-delay:0.6s"></i>
+        <i style="left:78%;bottom:4%;animation-delay:1.8s"></i>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const defaultMessage = `Hi Be! Na-realize ko na nagiging toxic ako minsan kapag nag-aaway tayo. Like kapag tinatanong kita kung bakit ang tagal mong mag-seen, nagiging dahilan pa tuloy ng away natin. Na-realize ko rin na kailangan ko nang tigilan yung ganung ugali. Pero kahit ganon pa man, mahal na mahal kita, Be. Kahit minsan nakakasakit ako, I promise I’ll try my best to be better for you. Aalisin ko yung mga bagay na nakakainis sayo para mas maging healthy at masaya yung relationship natin.
+
+Gusto kong malaman mo na sobrang thankful ako na ikaw yung kasama ko sa lahat. Hindi man ako perfect, pero ikaw yung reason bakit gusto kong magbago at maging best version ng sarili ko. Lagi mong tandaan na ikaw lang ang mahal ko, at ikaw lang ang gusto kong makasama hanggang dulo. 💖`;
+
+    const typedEl = document.getElementById('typed');
+    const cursor = document.getElementById('cursor');
+    const revealBtn = document.getElementById('reveal');
+
+    let typing = false;
+    function typeText(text, speed = 28){
+      if(typing) return;
+      typing = true;
+      typedEl.textContent = '';
+      cursor.style.display = 'inline-block';
+      let i=0;
+      const timer = setInterval(()=>{
+        typedEl.textContent += text[i];
+        i++;
+        if(i>=text.length){
+          clearInterval(timer);
+          typing = false;
+          cursor.style.display = 'none';
+        }
+      }, speed);
+    }
+
+    revealBtn.addEventListener('click', ()=> typeText(defaultMessage));
+
+    document.addEventListener('keydown',(e)=>{
+      if(e.key.toLowerCase()==='r') revealBtn.click();
+    });
+  </script>
+</body>
+</html>
